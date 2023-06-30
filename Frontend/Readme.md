@@ -1,0 +1,1 @@
+### The Repository contains the frontend files for Hospital Management System
