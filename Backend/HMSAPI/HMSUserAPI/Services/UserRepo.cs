@@ -2,6 +2,8 @@
 using HMSUserAPI.Interfaces;
 using HMSUserAPI.Models;
 using HMSUserAPI.Models.Context;
+using HMSUserAPI.Models.Error;
+using HMSUserAPI.Models.Logger;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -12,10 +14,12 @@ namespace HMSUserAPI.Services
     public class UserRepo : IRepo<User,int>
     {
         private readonly UserContext _context;
+        private readonly ICustomLogger _customLogger;
 
-        public UserRepo(UserContext context)
+        public UserRepo(UserContext context,ICustomLogger customLogger)
         {
             _context = context;
+            _customLogger = customLogger;
         }
 
         public async Task<User?> Add(User entity)
@@ -37,8 +41,9 @@ namespace HMSUserAPI.Services
             {
                 throw new ContextException(ce.Message);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _customLogger.WriteLog(e.Message);
                 await transaction.RollbackAsync();
             }
             return null;
@@ -57,14 +62,15 @@ namespace HMSUserAPI.Services
                     await transaction.CommitAsync();
                     return entity;
                 }
-                throw new ContextException("Context is empty");
+                throw new ContextException(ResponseMsg.Messages[12]);
             }
             catch (ContextException ce)
             {
                 throw new ContextException(ce.Message);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _customLogger.WriteLog(e.Message);
                 await transaction.RollbackAsync();
             }
             return null;
@@ -77,7 +83,7 @@ namespace HMSUserAPI.Services
             {
                 return await _context.Users.Include(u=>u.UserDetail).ThenInclude(us=>us.Doctor).Include(u=>u.UserDetail).ThenInclude(us=>us.Patient).SingleOrDefaultAsync(u=>u.Id==key);
             }
-            throw new ContextException("Context is empty");
+            throw new ContextException(ResponseMsg.Messages[12]);
         }
 
         public async Task<List<User>?> GetAll()
@@ -86,7 +92,7 @@ namespace HMSUserAPI.Services
             {
                 return await _context.Users.Include(u => u.UserDetail).ThenInclude(us => us.Doctor).Include(u => u.UserDetail).ThenInclude(us => us.Patient).ToListAsync();
             }
-            throw new ContextException("Context is empty");
+            throw new ContextException(ResponseMsg.Messages[12]);
         }
 
         public async Task<User?> Update(User entity)
@@ -102,14 +108,15 @@ namespace HMSUserAPI.Services
                     await transaction.CommitAsync();
                     return entity;
                 }
-                throw new ContextException("Context is empty");
+                throw new ContextException(ResponseMsg.Messages[12]);
             }
             catch (ContextException ce)
             {
                 throw new ContextException(ce.Message);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _customLogger.WriteLog(e.Message);
                 await transaction.RollbackAsync();
             }
             return null;

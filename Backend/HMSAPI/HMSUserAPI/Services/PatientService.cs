@@ -2,6 +2,7 @@
 using HMSUserAPI.Interfaces;
 using HMSUserAPI.Models;
 using HMSUserAPI.Models.DTOs;
+using HMSUserAPI.Models.Error;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -39,16 +40,16 @@ namespace HMSUserAPI.Services
             if (users != null)
             {
 
-                var doctors = users.Where(x => x.Role == "doctor" && x.UserDetail?.Patient == null).Select(u => new DoctorDTO(u.UserDetail)).ToList();
+                var doctors = users.Where(x => x.Role == "doctor" && x.UserDetail?.Patient == null).Select(u => new DoctorDTO(u.UserDetail,u.Email)).ToList();
                 if (doctorFilterDTO.Active != null && doctorFilterDTO.HighToLow != null )
                 {
-                    if(doctorFilterDTO.HighToLow == true)
+                    if(doctorFilterDTO.HighToLow == "yes")
                         return doctors.Where (x => x.Doctor?.Active == doctorFilterDTO.Active).OrderByDescending(x => x.Doctor?.ConsultingFees).ToList();
                     return doctors.Where(x => x.Doctor?.Active == doctorFilterDTO.Active).OrderBy(x => x.Doctor?.ConsultingFees).ToList();
                 }
                 if(doctorFilterDTO.HighToLow != null)
                 {
-                    if(doctorFilterDTO.HighToLow == true)
+                    if(doctorFilterDTO.HighToLow == "yes")
                         return doctors.OrderByDescending(x => x.Doctor?.ConsultingFees).ToList();
                     return doctors.OrderBy(x => x.Doctor?.ConsultingFees).ToList();
                 }
@@ -61,20 +62,30 @@ namespace HMSUserAPI.Services
             return null;
         }
 
+        public async Task<PatientDTO?> GetPatientDetail(UserDTO userDTO)
+        {
+            var user = await _repo.Get(userDTO.Id);
+            if (user != null && user.UserDetail != null && user.Role == "patient" && user.UserDetail.Patient!= null)
+            {
+                return new PatientDTO(user.UserDetail, user.Email ?? "");
+            }
+            return null;
+        }
+
         public async  Task<UserDTO?> PatientRegister(User user)
         {
             var users = await _repo.GetAll();
             if (users == null)
             {
-                throw new UserException("Users not Found");
+                throw new UserException(ResponseMsg.Messages[8]);
             }
 
-            if (user != null)
+            if (user != null && user.UserDetail != null && user.UserDetail.Patient != null)
             {
                 var userExists = users.FirstOrDefault(u => u.Email == user.Email);
                 if (userExists != null)
                 {
-                    throw new UserException("User Already Exists");
+                    throw new UserException(ResponseMsg.Messages[5]);
                 }
                 var hmac = new HMACSHA256();
                 user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(_generatePassword.GeneratePassword(user)));
@@ -96,7 +107,23 @@ namespace HMSUserAPI.Services
                 }
                 return null;
             }
-            throw new UserException("User can't be null"); ;
+            throw new UserException(ResponseMsg.Messages[4]); ;
+        }
+
+        public async Task<PatientUpdateDTO?> UpdatePatientDetails(PatientUpdateDTO patientUpdateDTO)
+        {
+            var user = await _repo.Get(patientUpdateDTO.Id);
+            if (user != null && user.UserDetail != null && user.UserDetail.Patient != null)
+            {
+                user.UserDetail.Address = patientUpdateDTO.Address;
+                user.UserDetail.DateOfBirth = patientUpdateDTO.DateOfBirth;
+                user.UserDetail.PhoneNUmber = patientUpdateDTO.Phone;
+                user.UserDetail.Patient.EmergencyContactName = patientUpdateDTO.EmergencyContactName;
+                user.UserDetail.Patient.EmergencyContactPhone = patientUpdateDTO.EmergencyContactPhone;
+                await _repo.Update(user);
+                return patientUpdateDTO;
+            }
+            return null;
         }
     }
 }

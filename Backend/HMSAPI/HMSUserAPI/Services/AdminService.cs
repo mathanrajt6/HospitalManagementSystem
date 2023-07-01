@@ -42,12 +42,35 @@ namespace HMSUserAPI.Services
             var users = await _repo.GetAll();
             if(users != null)
             {
-                var doctors = users.Where(x => x.Role == "doctor" && x.UserDetail?.Patient == null && x.UserDetail?.Doctor?.ApprovedStatus == doctorFilterDTO.Status).Select(u => new DoctorDTO(u.UserDetail)).ToList();
+                var doctors = users.Where(x => x.Role == "doctor" && x.UserDetail?.Patient == null && x.UserDetail?.Doctor?.ApprovedStatus == doctorFilterDTO.Status).Select(u => new DoctorDTO(u.UserDetail, u.Email)).ToList();
                 return doctors;
             }
             return null;
 
         }
 
+        public async Task<UserDetailDTO?> GetUserDetailDetail(UserDTO userDTO)
+        {
+            var user = await _repo.Get(userDTO.Id);
+            if(user != null && user.UserDetail!= null && user.Role == "admin")
+            {
+                return new UserDetailDTO(user.UserDetail, user.Email??"");
+            }
+            return null;
+        }
+
+        public async Task<UserUpdateDTO?> UpdateAdminDetails(UserUpdateDTO userUpdateDTO)
+        {
+            var user = await _repo.Get(userUpdateDTO.Id);
+            if(user != null && user.UserDetail != null)
+            {
+                user.UserDetail.Address = userUpdateDTO.Address;
+                user.UserDetail.DateOfBirth = userUpdateDTO.DateOfBirth;
+                user.UserDetail.PhoneNUmber = userUpdateDTO.Phone;
+                await _repo.Update(user);
+                return userUpdateDTO;
+            }
+            return null;
+        }
     }
 }

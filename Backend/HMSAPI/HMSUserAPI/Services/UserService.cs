@@ -40,7 +40,7 @@ namespace HMSUserAPI.Services
                         return null;
                 }
                 UserDTO returnUser = new UserDTO();
-                if (user.Role?.ToLower() == "doctor" && user.UserDetail?.Doctor?.ApprovedStatus == false)
+                if (user.Role?.ToLower() == "doctor")
                 {
                     returnUser.Status = user.UserDetail?.Doctor?.ApprovedStatus;
                 }
