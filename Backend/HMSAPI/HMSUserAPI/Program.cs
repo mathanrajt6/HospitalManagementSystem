@@ -1,3 +1,11 @@
+using HMSUserAPI.Interfaces;
+using HMSUserAPI.Models;
+using HMSUserAPI.Models.Context;
+using HMSUserAPI.Models.Logger;
+using HMSUserAPI.Services;
+using HMSUserAPI.Utility;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +40,23 @@ builder.Services.AddEndpointsApiExplorer();
                          }
                  });
     });
+
+//Injections
+builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("myConn")));
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
+builder.Services.AddScoped<ValidateModelFilter>();
+builder.Services.AddScoped<IRepo<User, int>, UserRepo>();
+builder.Services.AddScoped<IGeneratePassword,GeneratePasswordService>();
+builder.Services.AddScoped<ITokenGenerate, TokenGenerateService>();
+builder.Services.AddScoped<IAdminAction, AdminService>();
+builder.Services.AddScoped<IPatientAction, PatientService>();
+builder.Services.AddScoped<IDoctorAction, DoctorService>();
+builder.Services.AddScoped<IUserAction, UserService>();
+builder.Services.AddScoped<ICustomLogger, CustomLogger>();
+
 
 var app = builder.Build();
 
