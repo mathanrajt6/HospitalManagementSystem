@@ -15,6 +15,7 @@ namespace HMSUserAPI.Models.Context
             modelBuilder.Entity<UserDetail>().Property(ud => ud.UserDetailID).ValueGeneratedNever();
             modelBuilder.Entity<Doctor>().Property(d => d.DoctorID).ValueGeneratedNever();
             modelBuilder.Entity<Patient>().Property(p => p.PatientID).ValueGeneratedNever();
+            modelBuilder.Entity<User>().HasIndex(u=>u.Email).IsUnique(true);
 
         }
 

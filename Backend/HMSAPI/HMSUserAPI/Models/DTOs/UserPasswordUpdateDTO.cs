@@ -2,7 +2,7 @@
 
 namespace HMSUserAPI.Models.DTOs
 {
-    public class UserPasswordUpdateDTO
+    public class UserPasswordUpdateDTO : IEntity
     {
         [Required]
         public int ID { get; set; }

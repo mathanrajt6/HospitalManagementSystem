@@ -1,16 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
-namespace HMSUserAPI.Models
+namespace HMSUserAPI.Models.DTOs
 {
-    public class Patient : IEntity
+    public class PatientUpdateDTO : UserUpdateDTO
     {
-        [Key]
-        public int PatientID { get; set; }
-        [ForeignKey("PatientID")]
-        [JsonIgnore]
-        public UserDetail? UserDetail { get; set; }
         [Required]
         [MaxLength(50, ErrorMessage = "Emergency COntact name Group should be less than 50 characters")]
         public string? EmergencyContactName { get; set; }
@@ -20,7 +13,5 @@ namespace HMSUserAPI.Models
         [Required]
         [MaxLength(50, ErrorMessage = "Emergency Contact Relation should be less than 50 characters")]
         public string? BloodGroup { get; set; }
-
-
     }
 }
