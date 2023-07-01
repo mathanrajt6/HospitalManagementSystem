@@ -6,5 +6,6 @@ namespace HMSUserAPI.Interfaces
     {
         public Task<UserDTO?> Login(UserDTO userDTO);
         public Task<UserPasswordUpdateDTO?> PasswordUpdate(UserPasswordUpdateDTO userPasswordUpdateDTO);
+       
     }
 }
