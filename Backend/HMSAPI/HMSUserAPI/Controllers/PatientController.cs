@@ -5,6 +5,8 @@ using HMSUserAPI.Models.DTOs;
 using HMSUserAPI.Models.Error;
 using HMSUserAPI.Models.Logger;
 using HMSUserAPI.Utility;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -13,6 +15,7 @@ namespace HMSUserAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [EnableCors("MyCors")]
     public class PatientController : ControllerBase
     {
         private readonly ICustomLogger _customLogger;
@@ -70,6 +73,7 @@ namespace HMSUserAPI.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(List<DoctorDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "patient,admin")]
         public async Task<ActionResult<List<DoctorDTO>>> GetAllDoctor()
         {
             try
@@ -103,6 +107,8 @@ namespace HMSUserAPI.Controllers
         [ProducesResponseType(typeof(List<DoctorDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ServiceFilter(typeof(ValidateModelFilter))]
+        [Authorize(Roles = "patient,admin")]
+
         public async Task<ActionResult<List<DoctorDTO>>> GetAllDoctorBasedOnFilters(DoctorFilterDTO doctorFilterDTO)
         {
             try
@@ -135,6 +141,8 @@ namespace HMSUserAPI.Controllers
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ServiceFilter(typeof(ValidateModelFilter))]
+        [Authorize(Roles = "patient")]
+
         public async Task<ActionResult> UpdatePatientDetails(PatientUpdateDTO patientUpdateDTO )
         {
             try
@@ -168,6 +176,8 @@ namespace HMSUserAPI.Controllers
         [ProducesResponseType(typeof(PatientDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ServiceFilter(typeof(ValidateModelFilter))]
+        [Authorize(Roles = "patient")]
+
         public async Task<ActionResult<PatientDTO>> GetPatientDetails(UserDTO userDTO)
         {
             try

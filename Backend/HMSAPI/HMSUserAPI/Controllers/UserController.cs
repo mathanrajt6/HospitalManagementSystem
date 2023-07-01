@@ -5,6 +5,8 @@ using HMSUserAPI.Models.DTOs;
 using HMSUserAPI.Models.Error;
 using HMSUserAPI.Models.Logger;
 using HMSUserAPI.Utility;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -13,6 +15,7 @@ namespace HMSUserAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [EnableCors("MyCors")]
     public class UserController : ControllerBase
     {
         private readonly ICustomLogger _customLogger;
@@ -66,8 +69,7 @@ namespace HMSUserAPI.Controllers
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ServiceFilter(typeof(ValidateModelFilter))]
-
-
+        [Authorize]
         public async Task<ActionResult> UpdatePassword(UserPasswordUpdateDTO userPasswordUpdateDTO)
         {
             try

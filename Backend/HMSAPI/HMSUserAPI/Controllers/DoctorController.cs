@@ -4,6 +4,8 @@ using HMSUserAPI.Models;
 using HMSUserAPI.Models.DTOs;
 using HMSUserAPI.Models.Error;
 using HMSUserAPI.Utility;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -12,6 +14,7 @@ namespace HMSUserAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [EnableCors("MyCors")]
     public class DoctorController : ControllerBase
     {
         private readonly ICustomLogger _customLogger;
@@ -67,6 +70,7 @@ namespace HMSUserAPI.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(List<PatientDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "doctor,admin")]
         public async Task<ActionResult<List<PatientDTO>>> GetAllPatient()
         {
             try
@@ -106,6 +110,8 @@ namespace HMSUserAPI.Controllers
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ServiceFilter(typeof(ValidateModelFilter))]
+        [Authorize(Roles = "doctor")]
+
         public async Task<ActionResult> ToggleActiveStatus(DoctorFilterDTO doctorFilterDTO)
         {
             try
@@ -138,6 +144,8 @@ namespace HMSUserAPI.Controllers
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ServiceFilter(typeof(ValidateModelFilter))]
+        [Authorize(Roles = "doctor")]
+
         public async Task<ActionResult> UpdateDoctorDetails(DoctorUpdateDTO doctorUpdateDTO)
         {
             try
@@ -170,6 +178,8 @@ namespace HMSUserAPI.Controllers
         [ProducesResponseType(typeof(DoctorDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ServiceFilter(typeof(ValidateModelFilter))]
+        [Authorize(Roles = "doctor")]
+
         public async Task<ActionResult<DoctorDTO>> GetDoctorDetails(UserDTO userDTO)
         {
             try
