@@ -1,0 +1,122 @@
+*
+{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.main
+{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 10% 90%;
+    background-color: white;
+    color: #0092a8;
+    /* background: linear-gradient(to right, #edfdfe 50%, #d5f9fe 50%); */
+}
+
+
+.main .main-header
+{
+    grid-row: 1/2;
+    display:flex;
+    align-items: center;
+}
+
+.main .main-header nav{
+    width: 100%;
+
+}
+
+.main .main-header label{
+    font-size: 30px;
+    padding-left:20px;
+    font-weight: bold;
+    color: #0092a8;
+    padding-left: 40px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+}
+
+.main .main-header ul{
+
+    float: right;
+    color: #0092a8;
+    margin-right: 20px;
+    
+}
+
+.main .main-header  li{
+    font-weight: 700;
+    display: inline-block;
+    margin: 0px 20px ;
+    
+}
+
+.main .main-header  a{
+    color: #0092a8;
+    font-size: 18px;
+}
+
+
+.main .hamburger
+{
+    border: none;
+    font-size: 30px;
+    float: right;
+    display: none;
+    background-color: white;
+    /* margin-top: 2px; */
+}
+
+.main .main-content
+{
+    grid-row: 2/-1;
+    padding: 1% 5%;
+
+}
+
+.main nav  ul{
+    height: 35px;
+    display: flex;
+    align-items: flex-end;
+}
+.main .show
+{
+    left: 0;
+}
+
+.main button i{
+    font-size: 35px;
+    font-weight: 800;
+    transition: 0.5s all;
+}
+@media screen and (max-width:700px) {
+    
+    .main nav ul{
+        display: block;
+        position: fixed;
+        width: 100vw;    
+        height: 100vh;
+        top:auto;
+        left:100%;
+        text-align: right;
+        transition: 0.5s all;
+        background-color: #d5f9fe;
+        margin-top:10px ;
+        padding-right: 50px;
+        z-index: 999;
+    }
+
+    .main .hamburger
+    {
+        display: block;
+        margin-right: 30px;
+    }
+    
+    .main .main-header  li{
+        display: block;
+        margin: 15px 0px ;
+        
+    }
+}
