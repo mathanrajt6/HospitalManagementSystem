@@ -1,0 +1,154 @@
+*
+{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.patient-register
+{
+    width: 100%;
+    height: 100%;
+    padding: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.patient-register .patient-register-container
+{
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+}
+
+.patient-register .patient-register-info
+{
+    flex: 40%;
+    background-color: antiquewhite;
+}
+
+
+.patient-register .patient-register-form
+{
+    flex: 60%;
+    height: 100%;
+}
+
+
+.patient-register .patient-register-item
+{
+    width: 280px;
+}
+
+.patient-register .patient-register-item > input{
+    border: none;
+    border-bottom: 1px solid black;
+    margin-left:10px ;
+    font-size: 0.9rem;
+    width: 270px;
+}
+
+.patient-register .patient-register-form-container
+{
+    padding:1% 5% ;
+}
+
+.patient-register .patient-register hr{
+    width: 35px;
+    border: 2px solid;
+    border-radius: 5px;
+    margin: 15px 0px 0px 0px;
+}
+
+.patient-register .patient-register-item > label
+{
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.patient-register .patient-register-items
+{
+    padding: 20px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit,300px);
+    align-items: center;
+    justify-content: center;
+}
+
+.patient-register .patient-register-form input[type="radio"]
+{
+    position: relative;
+    top:2px;
+    margin: 0px 3px ;
+    width: auto;
+}
+
+.patient-register .patient-register-form #male
+{
+    margin-left: 10px;
+}
+.patient-register .patient-register-form input:focus
+{
+    outline: none;
+}
+
+.patient-register .btn
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+}
+
+.patient-register .btn > button
+{
+    padding: 5px 10px;
+    width: 300px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    color:white;
+    background-color: #0092a8;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.patient-register .valid
+{
+    border-bottom:2px solid green !important;
+    transition: 0.2s all;
+}
+
+.patient-register .invalid
+{
+    border-bottom:2px solid red !important;
+    transition: 0.2s all;
+
+}
+
+.patient-register .patient-register-container span{
+    font-size: 0.6rem;
+    text-align: center;
+    display: block;
+}
+@media screen and (max-width:1170px) {
+
+    .patient-register .patient-register-info
+    {
+        flex: 100%;
+    }
+
+    .patient-register .patient-register-form
+    {
+        flex: 100%;
+       
+    }
+
+
+}
