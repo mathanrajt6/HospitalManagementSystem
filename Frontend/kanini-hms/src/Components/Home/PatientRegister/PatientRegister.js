@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './PatientRegister.css'
+import { Link } from 'react-router-dom';
 
 function PatientRegister()
 {
@@ -226,6 +227,7 @@ function PatientRegister()
                 var user = await data.json()
                 sessionStorage.setItem('token',user.token)
                 console.log(user)
+                document.getElementById('patient-register-validate').innerHTML = "Registered Sucessfully";
                 clear();
                 // if(user.role == 'admin')
                 //         navigate('/intern')
@@ -254,7 +256,6 @@ function PatientRegister()
         <div className="patient-register">
             <div className='patient-register-container'>
                     <div className='patient-register-info'>
-                          hi  
                     </div>
                     <div className='patient-register-form'>
                         <div className='patient-register-form-container'>
@@ -374,7 +375,7 @@ function PatientRegister()
                                     <button className='patient-register-btn' onClick={clear}> Clear  </button> 
 
                                 </div>
-                                <a className='register-link'> Already have anAccount  </a>
+                                <a className='register-link'> <Link to='/doctorRegister'>  Move to Doctor Regsiter </Link> </a>
 
                         </div>
                 </div>

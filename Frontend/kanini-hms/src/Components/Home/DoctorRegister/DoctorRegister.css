@@ -12,6 +12,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: white;
+
 }
 
 .doctor-register-container
@@ -26,20 +28,47 @@
 {
     flex: 30%;
     background-color: antiquewhite;
+    background-image: url('../../../Asset/register-doctor.jpg');
+    /* background-color: aliceblue; */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: auto;
+    height: auto;
+    animation: slide 30s linear infinite;
 }
 
+
+.doctor-register-info {
+    background-position: left;
+    background-repeat: no-repeat;
+  
+  }
+  
+  @keyframes slide {
+    0% {
+      background-position: left;
+    }
+    50% {
+      background-position: right;
+    }
+    100% {
+      background-position: left;
+    }
+  }
 
 .doctor-register-form
 {
     flex: 70%;
     height: 100%;
+    width: 100%;
 }
 
-
+/* 
 .doctor-register-item
 {
     width: 280px;
-}
+} */
 
 .doctor-register-item > input{
     border: none;
@@ -62,13 +91,22 @@
     padding:1% 5% ;
 }
 
+
+
 .doctor-register hr{
     width: 35px;
     border: 2px solid;
     border-radius: 5px;
-    margin: 15px 0px 0px 0px;
+    margin: 10px 0;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 0.3s, transform 0.3s;
 }
 
+.doctor-register:hover hr {
+    opacity: 1;
+    transform: translateX(0%);
+}
 .doctor-register-item > label
 {
     font-size: 1rem;
@@ -122,6 +160,15 @@
     font-size: 0.6rem;
     text-align: center;
     display: block;
+}
+.doctor-register a{
+    color: #0092a8;
+    
+}
+
+.doctor-register-form
+{
+    padding-bottom: 50px;
 }
 
 @media screen and (max-width:1170px) {

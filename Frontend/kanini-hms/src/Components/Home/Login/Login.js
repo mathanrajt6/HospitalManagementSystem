@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './Login.css'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login()
 {
@@ -48,7 +48,15 @@ function Login()
                     sessionStorage.setItem('role',user.role)
                     sessionStorage.setItem('id',user.id)
                     sessionStorage.setItem('doctorStatus',user.status)
-                    navigate('/main');
+                    if(user.role === 'doctor')
+                    {
+                        if(user.status === 'approved')
+                            navigate('/main/patients');
+                        else
+                            navigate('/main')
+                    }
+                    else    
+                        navigate('/main/doctors')
 
                     // if(user.role == 'admin')
                     //         navigate('/intern')
@@ -95,7 +103,7 @@ function Login()
         <div className="login">
             <div className='login-container'>
                 <div className='login-info'>
-                        g
+                        
                 </div>
                 <div className='login-form'>
                     <div className='login-from-container'>
@@ -110,7 +118,7 @@ function Login()
                         <div className='btn'>
                             <button className='login-btn' onClick={login}> login </button> 
                         </div>
-                        <a className='register-link'> Create new Account  </a>
+                        <Link to='/register' className='register-link'> Create new Account  </Link>
 
                     </div>
                 </div>

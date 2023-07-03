@@ -6,6 +6,10 @@ import Login from './Login/Login';
 import PatientRegister from './PatientRegister/PatientRegister';
 import DoctorRegister from './DoctorRegister/DoctorRegister';
 import { Link, Route, Routes } from 'react-router-dom';
+import AboutUs from './AboutUs/AbooutUs';
+import Register from './Register/Register';
+import Pending from '../Main/Pending/Pendind';
+import Rejected from '../Main/Rejected/Rejected';
 
 function Home()
 {
@@ -19,21 +23,26 @@ function Home()
         setHamburger(!hamburger);
 
     }
+    const closeMenu = () => {
+        document.body.getElementsByClassName('header-link')[0].classList.remove('show');
+        setHamburger(false);
+      };
+   
+
     return(
         <div className="home">
                 <div className='home-header'>
                     <nav>
                         <label className='header-title'>
-                            <Link onClick={toggle} to='/home/ ' className='logo' >KANINI HMS</Link> 
+                            <Link  className='logo' to='/' >KANINI HMS</Link> 
                         </label>
                         <label className='hamburger'>
                             
                         </label>
                         <ul className='header-link'>
-                            <li className='header-link-item'> <Link onClick={toggle} to='/home/login'>Login</Link> </li>
-                            <li className='header-link-item'> <Link onClick={toggle} to='/home/Register'>Register</Link> </li>
-                            <li className='header-link-item'>  <Link to='/home/login'  onClick={toggle}>About us</Link> </li>
-                            <li className='header-link-item'><Link to='/home/login'  onClick={toggle} >Contact us</Link> </li>
+                            <li className='header-link-item'> <Link onClick={closeMenu} to='/home/login'>Login</Link> </li>
+                            <li className='header-link-item'> <Link onClick={closeMenu} to='/home/Register'>Register</Link> </li>
+                            <li className='header-link-item'>  <Link to='/home/AboutUs'  onClick={closeMenu}>About us</Link> </li>
                         </ul>
                         <button className='hamburger' onClick={toggle}>
                         <i className={hamburger ?  'not-bi bi-x':'bi bi-list'}></i>
@@ -43,9 +52,13 @@ function Home()
                 <div className='home-content'>
                     <Routes>
                         <Route path='/' element={<HomeContent/>} />
-                        <Route path='/Register' element={<DoctorRegister/>}/>
-                        <Route path='/register' element={<PatientRegister/>}/>
+                        <Route path='/Register' element={<Register/>}/>
+                        <Route path='/patientRegister' element={<PatientRegister/>}/>
+                        <Route path='/doctorRegister' element={<DoctorRegister/>}/>
+
                         <Route path='/login' element={<Login/>}/>
+                        <Route path='/AboutUs' element={<AboutUs/>}/>
+
                     </Routes>   
 
                 </div>

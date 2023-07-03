@@ -13,6 +13,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: white;
+
 }
 
 .patient-register .patient-register-container
@@ -56,11 +58,20 @@
     padding:1% 5% ;
 }
 
-.patient-register .patient-register hr{
+
+.patient-register hr{
     width: 35px;
     border: 2px solid;
     border-radius: 5px;
-    margin: 15px 0px 0px 0px;
+    margin: 10px 0;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.patient-register:hover hr {
+    opacity: 1;
+    transform: translateX(0%);
 }
 
 .patient-register .patient-register-item > label
@@ -137,6 +148,39 @@
     text-align: center;
     display: block;
 }
+
+.patient-register-info
+{
+    flex: 30%;
+    background-color: antiquewhite;
+    background-image: url('../../../Asset/patient-register.jpg');
+    /* background-color: aliceblue; */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: auto;
+    height: auto;
+    animation: slide 30s linear infinite;
+}
+
+
+.patient-register-info {
+    background-position: left;
+    background-repeat: no-repeat;
+  
+  }
+  
+  @keyframes slide {
+    0% {
+      background-position: left;
+    }
+    50% {
+      background-position: right;
+    }
+    100% {
+      background-position: left;
+    }
+  }
 @media screen and (max-width:1170px) {
 
     .patient-register .patient-register-info

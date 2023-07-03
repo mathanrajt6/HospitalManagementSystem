@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './DoctorRegister.css'
+import { Link } from 'react-router-dom';
 
 function DoctorRegister()
 {
@@ -55,6 +56,8 @@ function DoctorRegister()
                 sessionStorage.setItem('token',user.token)
                 console.log(user)
                 clear();
+                document.getElementById('regsiter-doctor-validate').innerHTML = "Register sucessfully";
+
                 // if(user.role == 'admin')
                 //         navigate('/intern')
                 // else{
@@ -257,7 +260,7 @@ function DoctorRegister()
         <div className="doctor-register">
             <div className='doctor-register-container'>
                     <div className='doctor-register-info'>
-                        hi  
+                        
                     </div>
                     <div className='doctor-register-form'>
                         <div className='doctor-register-form-container'>
@@ -376,7 +379,7 @@ function DoctorRegister()
                                     <button className='doctor-register-btn' onClick={clear}> Clear  </button> 
 
                                 </div>
-                                <a className='register-link'> Already have anAccount  </a>
+                                <a className='register-link'><Link to='/patientRegister'>  Move to patient Regsiter </Link>   </a>
                         </div>
                 </div>
             </div>

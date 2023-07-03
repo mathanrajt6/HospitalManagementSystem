@@ -1,0 +1,60 @@
+.about-us
+{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 5% 5%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+    
+}
+
+.contact-us
+{
+    flex: 50%;
+    height: 90%;
+    padding: 10px 20px;
+
+    background-color: #d5f9fe   ;
+}
+
+
+.about-us-content
+{
+    flex:50%;
+    height: 90%;
+    background-color: white;
+    padding: 10px 20px;
+
+
+}
+
+.about-us h2{
+    margin: 10px 0px ;
+}
+
+
+@media screen and (max-width:700px) {
+    .about-us
+    {
+        padding: 2% 2%;
+        
+    }
+
+    .contact-us
+    {
+        flex: 100%;
+        height: auto;
+    
+    }
+
+
+    .about-us-content
+    {
+        flex:100%;
+        height: auto;
+
+    }
+    
+}
