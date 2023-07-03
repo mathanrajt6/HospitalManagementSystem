@@ -27,7 +27,7 @@ namespace HMSUserAPI.Services
             var users = await _repo.GetAll();
             if (users != null)
             {
-                var doctors = users.Where(x => x.Role == "doctor" && x.UserDetail?.Patient == null ).Select(u => new DoctorDTO(u.UserDetail)).ToList();
+                var doctors = users.Where(x => x.Role == "doctor" && x.UserDetail?.Patient == null && x.UserDetail?.Doctor?.ApprovedStatus=="approved" ).Select(u => new DoctorDTO(u.UserDetail)).ToList();
                 return doctors;
             }
             return  null;
@@ -40,7 +40,7 @@ namespace HMSUserAPI.Services
             if (users != null)
             {
 
-                var doctors = users.Where(x => x.Role == "doctor" && x.UserDetail?.Patient == null).Select(u => new DoctorDTO(u.UserDetail,u.Email)).ToList();
+                var doctors = users.Where(x => x.Role == "doctor" && x.UserDetail?.Patient == null && x.UserDetail?.Doctor?.ApprovedStatus == "approved").Select(u => new DoctorDTO(u.UserDetail,u.Email)).ToList();
                 if (doctorFilterDTO.Active != null && doctorFilterDTO.HighToLow != null )
                 {
                     if(doctorFilterDTO.HighToLow == "yes")
