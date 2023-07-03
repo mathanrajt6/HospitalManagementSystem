@@ -107,7 +107,7 @@ namespace HMSUserAPI.Controllers
         [ProducesResponseType(typeof(List<DoctorDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ServiceFilter(typeof(ValidateModelFilter))]
-        [Authorize(Roles = "patient,admin")]
+        [Authorize(Roles = "patient")]
 
         public async Task<ActionResult<List<DoctorDTO>>> GetAllDoctorBasedOnFilters(DoctorFilterDTO doctorFilterDTO)
         {
