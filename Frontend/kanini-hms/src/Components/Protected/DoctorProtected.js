@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 function DoctorProtected({role,children})
 {
 
-    if(role === 'doctor' )
+    if(role!= null && role === 'doctor' )
     {
         if(sessionStorage.getItem('doctorStatus').toLowerCase() === "approved")
             return children;

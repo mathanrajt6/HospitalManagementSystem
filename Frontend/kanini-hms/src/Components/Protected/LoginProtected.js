@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 function LoginProtected({role,children})
 {
 
-    if(role == null || role === "")
+    if(role != null || role !== "")
     {
         if(role === 'doctor' )
         {
@@ -12,7 +12,7 @@ function LoginProtected({role,children})
             if(sessionStorage.getItem('doctorStatus').toLowerCase() === "pending")  
                 return <Navigate to="/pending"/>;
             if(sessionStorage.getItem('doctorStatus').toLowerCase() === "un-approved")  
-                return <Navigate to="/un-approved"/>;
+                return <Navigate to="/rejected"/>;
         }  
         return children;
     }
