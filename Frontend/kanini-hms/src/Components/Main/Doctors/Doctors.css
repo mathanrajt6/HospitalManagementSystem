@@ -4,6 +4,7 @@
     height: 100%;
     display: flex;
     flex-wrap: wrap;
+    box-sizing: border-box;
 }
 
 .doctors-list
@@ -25,16 +26,44 @@
 {
     display: flex;
     text-align: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     flex-wrap: wrap;
    
 }
-.doctor-search > input
+
+.doctor-search  select
 {
-    width: 300px;
+    width: 100px;
+    padding: 5px;
+    margin-left: auto;
+}
+.doctor-search  input
+{
+  margin: 10px 0px;
+  width: 300px;
+  border: none;
+  border-bottom: 2px solid black;
+  text-align: left;
+  font-size: 0.9rem;
+  padding: 2px;
 }
 
+.doctor-search  input:focus
+{
+  outline: none;
+}
 
+.patient-info, .admin-info
+{
+    background-color:  #d5f9fe;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 
+}
+
+.patient-info h2, .patient-info h3, .patient-info h1, .admin-info h2, .admin-info h3, .admin-info h1{
+    margin: 10px 0px ;
+}
 
 @media screen and  (max-width:820px){
     .doctors-list

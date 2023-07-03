@@ -32,7 +32,7 @@ function Patients()
                 {
                     "accept": "text/plain",
                     "Content-Type": 'application/json',
-                    "Authorization": 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI0Iiwicm9sZSI6ImRvY3RvciIsIm5iZiI6MTY4ODI0NDgwOSwiZXhwIjoxNjg4MzMxMjA5LCJpYXQiOjE2ODgyNDQ4MDl9.Zg5y3m6L23fagUTdTAf0KrFchF5El7WCfsE5jBJqxF8'
+                    "Authorization": 'Bearer ' + sessionStorage.getItem('token')
     
                 }}
         ).then(async (data)=>
@@ -75,8 +75,8 @@ function Patients()
                 Patient Details
             </h2>
            <div className='patients-search-bar'>
-            <label>search : </label>
-           <input type='text' onChange={(event)=>{
+            <label><i class="bi bi-search"> </i> : </label>
+           <input placeholder='search patient' type='text' onChange={(event)=>{
                     setsearch(event.target.value);
             }}/>
            </div>

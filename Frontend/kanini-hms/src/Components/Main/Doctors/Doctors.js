@@ -21,8 +21,6 @@ function Doctors(prop)
 
       useEffect(()=>
       {
-        sessionStorage.setItem('role',"admin")
-        sessionStorage.setItem('YOUR_TOKEN','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMCIsInJvbGUiOiJhZG1pbiIsIm5iZiI6MTY4ODI4NzcwOCwiZXhwIjoxNjg4Mzc0MTA4LCJpYXQiOjE2ODgyODc3MDh9.d_465EX7iBUA_w5G1yAoLYWgQNBrdW0vf49twvzXGbM')
         if(sessionStorage.getItem('role')==="admin")
         {
            adminGetAll();
@@ -42,7 +40,7 @@ function Doctors(prop)
                 {
                     "accept": "text/plain",
                     "Content-Type": 'application/json',
-                    "Authorization": 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4Iiwicm9sZSI6InBhdGllbnQiLCJuYmYiOjE2ODgyODY5NzIsImV4cCI6MTY4ODM3MzM3MiwiaWF0IjoxNjg4Mjg2OTcyfQ.5e0KOZsWKwrkmm98fKOzuyK9wRmjPDcpugC9EUYirPA'
+                    "Authorization": 'Bearer ' + sessionStorage.getItem('token')
     
                 }}
             ).then(async (data)=>
@@ -68,7 +66,7 @@ function Doctors(prop)
             {
                 "accept": "text/plain",
                 "Content-Type": 'application/json',
-                "Authorization": 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMCIsInJvbGUiOiJhZG1pbiIsIm5iZiI6MTY4ODI4NzcwOCwiZXhwIjoxNjg4Mzc0MTA4LCJpYXQiOjE2ODgyODc3MDh9.d_465EX7iBUA_w5G1yAoLYWgQNBrdW0vf49twvzXGbM'
+                "Authorization": 'Bearer ' + sessionStorage.getItem('token')
 
             }}
         ).then(async (data)=>
@@ -93,7 +91,7 @@ function Doctors(prop)
           "headers": {
             "accept": 'text/plain',
             'Content-Type': 'application/json',
-            "Authorization": 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMCIsInJvbGUiOiJhZG1pbiIsIm5iZiI6MTY4ODI4NzcwOCwiZXhwIjoxNjg4Mzc0MTA4LCJpYXQiOjE2ODgyODc3MDh9.d_465EX7iBUA_w5G1yAoLYWgQNBrdW0vf49twvzXGbM'
+            "Authorization": 'Bearer ' + sessionStorage.getItem('token')
           },
           "body": JSON.stringify(doctorStatus),
         })
@@ -218,7 +216,7 @@ function Doctors(prop)
           "headers": {
             "accept": 'text/plain',
             'Content-Type': 'application/json',
-            "Authorization": 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4Iiwicm9sZSI6InBhdGllbnQiLCJuYmYiOjE2ODgyODY5NzIsImV4cCI6MTY4ODM3MzM3MiwiaWF0IjoxNjg4Mjg2OTcyfQ.5e0KOZsWKwrkmm98fKOzuyK9wRmjPDcpugC9EUYirPA'
+            "Authorization": 'Bearer ' + sessionStorage.getItem('token')
           },
           "body": JSON.stringify(doctorActiveStatus),
         })
@@ -268,9 +266,12 @@ function Doctors(prop)
                 Doctors Details
             </h1>
             <div className='doctor-search'>
+            <div>
+            <label><i class="bi bi-search"> </i> : </label>
                 <input type='text'  value={search}
             onChange={(event)=>setSearch(event.target.value)}
-            />
+            placeholder='Search Doctors' />
+            </div>
 
            {
             sessionStorage.getItem('role') === "admin"?
@@ -319,19 +320,80 @@ function Doctors(prop)
                 } */}
             </div>
             <div className='doctors-info'>
-                    <div className='doctor-call'>
-                            if you need a doctor urgently outside of medicenter opening hours,
-                            call the phone number provided note that call only if urgent and emergency
-                    </div>
-                    <br/>
-                    <div className='working-time'>
-                        Monday to Saturday
-                        10AM to 10PM
-                        Sunday
-                        10Am to 2PM
-                    </div>
+{/*                    
+                    {sessionStorage.getItem('role')==='admin' ?
+                    (<div className='admin-info'>
+                      
+                    <h1>KANINI HMS</h1>
+                    <h2>Admin Instructions: Doctor Approval</h2>
+
+                      <h3>Doctor Approval Process</h3>
+                      <p>As an admin, your role is to review and approve doctor profiles before they are listed on the website. Follow these instructions to ensure a thorough and accurate approval process:</p>
+
+                      <ol>
+                        <li>
+                          <h3>Review Application</h3>
+                          <p>Upon receiving a doctor's application, carefully review all submitted information, including their qualifications, experience, and certifications.</p>
+                        </li>
+
+                        <li>
+                          <h3>Verify Credentials</h3>
+                          <p>Verify the authenticity of the doctor's credentials, such as medical degrees, licenses, and professional affiliations. Cross-reference the provided information with reliable sources or contact relevant authorities if necessary.</p>
+                        </li>
+
+                        <li>
+                          <h3>Check References</h3>
+                          <p>Contact the references provided by the doctor to validate their professional reputation and work history. Request additional references if needed to ensure a comprehensive evaluation.</p>
+                        </li>
+
+                        <li>
+                          <h3>Interview the Doctor</h3>
+                          <p>Conduct an interview with the doctor to assess their communication skills, professionalism, and alignment with the values and standards of our organization. Address any questions or concerns that arise during the interview.</p>
+                        </li>
+
+                        <li>
+                          <h3>Finalize Approval Decision</h3>
+                          <p>Based on your evaluation, make an informed decision on whether to approve or reject the doctor's application. Consider their qualifications, experience, references, and interview performance.</p>
+                        </li>
+                      </ol>
+
+                      <p>Remember to maintain professionalism, confidentiality, and fairness throughout the approval process. Approve only those doctors who meet our criteria and demonstrate the necessary qualifications and expertise.</p>
+
+                      <p>Thank you for your dedication and commitment to ensuring the highest standards in our network of doctors.</p>
+
+
+                    </div>)
+                    :
+                    (<div className='patient-info'>
+              <h1>KANINI HMS</h1>
+              <h2>Urgent Doctor Contact Information</h2>
+
+              <p>If you need a doctor urgently outside of Medicenter's opening hours, please call the phone number provided. However, please note that you should only make the call in cases of urgency and emergency situations.</p>
+
+              <h3>Medicenter Opening Hours</h3>
+              <p>
+                Monday to Saturday: 10:00 AM to 10:00 PM<br/>
+                Sunday: 10:00 AM to 2:00 PM
+              </p>
+
+              <p>For patients requiring immediate medical attention outside of these hours, please contact the emergency phone number provided below:</p>
+
+              <h3>Emergency Phone Number</h3>
+              <p>[Emergency Phone Number]</p>
+
+              <p>It is important to emphasize that this emergency phone number should be used strictly for urgent and emergency situations. If your condition is not urgent or can wait until Medicenter reopens, we encourage you to seek medical attention during our regular operating hours.</p>
+
+              <h3>Non-Urgent Inquiries</h3>
+              <p>If you have any non-urgent medical inquiries or general questions, please contact us during Medicenter's regular operating hours. Our staff will be available to assist you and provide the necessary information.</p>
+
+              <h3>Medical Advice</h3>
+              <p>If you require medical advice but it is not an emergency, we recommend contacting your primary care physician or local medical helpline. They will be able to provide guidance and answer your non-urgent medical questions.</p>
+
+              <p>Remember, it is important to prioritize emergency situations for the safety and well-being of all patients.</p>
+                                </div>)
+                } */}
             </div>
-            </div>
+          </div>
         </div>
     );
 

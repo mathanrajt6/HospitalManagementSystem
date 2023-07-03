@@ -8,6 +8,8 @@ import { Link, Navigate, Route, Routes, unstable_HistoryRouter, useNavigate } fr
 import AdminProtected from "../Protected/AdminProtected";
 import DoctorProtected from "../Protected/DoctorProtected";
 import Home from "../Home/Home";
+import LoginProtected from "../Protected/LoginProtected";
+import UpdatePassword from "./UpdatePassword/UpdatePassword";
 function Main()
 {
     const navigate = useNavigate();
@@ -21,7 +23,15 @@ function Main()
         setHamburger(!hamburger);
 
     }
-   
+    const closeMenu = () => {
+        document.body.getElementsByClassName('header-link')[0].classList.remove('show');
+        setHamburger(false);
+      };
+    const logout=()=>
+    {
+        sessionStorage.clear()
+        closeMenu();
+    }
   
     return(
         <div className="main">
@@ -34,15 +44,15 @@ function Main()
                                 
                             </label>
                             <ul className='header-link'>
-                                {/* {sessionStorage.getItem('role').toLowerCase() === 'admin'  || sessionStorage.getItem('role').toLowerCase() === 'admin' ?
-                                     (<li className='header-link-item'> <Link to='/main/doctors' onClick={toggle}>Doctor</Link> </li>)
+                                {sessionStorage.getItem('role')!= null && (sessionStorage.getItem('role').toLowerCase() === 'admin'  || sessionStorage.getItem('role').toLowerCase() === 'patient') ?
+                                     (<li className='header-link-item'> <Link to='/main/doctors' onClick={closeMenu}>Doctor</Link> </li>)
                                     :
-                                    (<li className='header-link-item'> <Link  to='/main/patients' onClick={toggle}> Patient  </Link> </li>)
-                                } */}
-                                <li className='header-link-item'> <Link to='/main/doctors' onClick={toggle} > Doctor </Link> </li>
-                                <li className='header-link-item'> <Link  to='/main/patients' onClick={toggle}> Patient </Link> </li>
-                                <li className='header-link-item'> <Link onClick={toggle} > Profile </Link> </li>
-                                <li className='header-link-item'> <Link to='/' onClick={toggle}> Logout </Link> </li>
+                                    (<li className='header-link-item'> <Link  to='/main/patients' onClick={closeMenu}> Patient  </Link> </li>)
+                                }
+                                {/* <li className='header-link-item'> <Link to='/main/doctors' onClick={toggle} > Doctor </Link> </li>
+                                <li className='header-link-item'> <Link  to='/main/patients' onClick={toggle}> Patient </Link> </li> */}
+                                <li className='header-link-item'> <Link to='/main/updatePassword' onClick={closeMenu} > Update Password </Link> </li>
+                                <li className='header-link-item'> <Link to='/' onClick={logout}> Logout </Link> </li>
                             </ul>
                             <button className='hamburger' onClick={toggle}>
                             <i className={hamburger ?  'not-bi bi-x':'bi bi-list'}></i>
@@ -55,16 +65,18 @@ function Main()
                     {/* <Route path='/main/doctors' element={
                         <AdminProtected role={sessionStorage.getItem('role')} > <Doctors/> </AdminProtected>
                     }/> */}
-                    <Route path='/doctors' element={<Doctors/>}/>
-                    <Route path='/patients' element={<Patients/> }/>
+                    {/* <Route path='/doctors' element={<Doctors/>}/> */}
+                    {/* <Route path='/patients' element={<Patients/> }/> */}
                     
 
-                    {/* <Route path='/main/doctors' element={
+                    <Route path='/doctors' element={
                         <AdminProtected role={sessionStorage.getItem('role')} > <Doctors/> </AdminProtected>
                     }/>
-                      <Route path='/main/patients' element={
+                      <Route path='/patients' element={
                         <DoctorProtected role={sessionStorage.getItem('role')} > <Patients/> </DoctorProtected>
-                    }/> */}
+                    }/>
+                     <Route path="/updatePassword" element={<UpdatePassword/>}/>
+      
                     
                    
 

@@ -21,6 +21,7 @@
   background-color: white;
   overflow-x: auto;
   grid-row: 2/-1;
+  padding-top: 20px;
 }
 
 
@@ -28,19 +29,23 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
 }
-
+th{
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 th, td {
   text-align: left;
   padding: 8px;
 }
 
-tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even){background-color: 
+  #edfdfe}
 
 .patients-search-bar
 {
-  text-align: center;
+  text-align: left;
+  margin-bottom: 20px;
 }
 
 
@@ -50,6 +55,9 @@ tr:nth-child(even){background-color: #f2f2f2}
   width: 300px;
   border: none;
   border-bottom: 2px solid black;
+  text-align: left;
+  font-size: 0.9rem;
+  padding: 2px;
 }
 
 .patients-search-bar > input:focus
