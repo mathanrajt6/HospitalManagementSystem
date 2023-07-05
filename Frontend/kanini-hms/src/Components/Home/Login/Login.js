@@ -52,8 +52,10 @@ function Login()
                     {
                         if(user.status === 'approved')
                             navigate('/main/patients');
-                        else
-                            navigate('/main')
+                        if(user.status === 'un-approved')
+                            navigate('/un-approved')
+                        if(user.status === 'pending')
+                            navigate('/pending')
                     }
                     else    
                         navigate('/main/doctors')

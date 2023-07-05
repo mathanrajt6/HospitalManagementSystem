@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './PatientRegister.css'
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function PatientRegister()
 {
@@ -27,10 +28,11 @@ function PatientRegister()
             }
           }
     );
-    const clear=()=>
-    {
-       window.location.reload();
-    }
+    const clear = () => {
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000); // 2000 milliseconds = 2 seconds
+      };
 
     ///
     function getAge(d1) {
@@ -49,7 +51,7 @@ function PatientRegister()
 
     const ValiditeFirstName=()=>
     {
-        var firstname =(/^[A-Za-z]{1,50}$/).test(patientRegister.userDetail.firstName);
+        var firstname =(/^[A-Za-z]{4,50}$/).test(patientRegister.userDetail.firstName);
         if(firstname)
         {
             document.getElementById('first-name-validate').innerHTML="";
@@ -57,7 +59,7 @@ function PatientRegister()
             document.body.getElementsByClassName('patient-first-name')[0].classList.remove('invalid');
         }
         else{
-            document.getElementById('first-name-validate').innerHTML="First Name should have only alphabet and less than 50 character";
+            document.getElementById('first-name-validate').innerHTML="First Name should have only alphabet and and more than 4 chracter and  less than 50 character";
             document.body.getElementsByClassName('patient-first-name')[0].classList.remove('valid');
             document.body.getElementsByClassName('patient-first-name')[0].classList.add('invalid');
         }
@@ -227,7 +229,10 @@ function PatientRegister()
                 var user = await data.json()
                 sessionStorage.setItem('token',user.token)
                 console.log(user)
-                document.getElementById('patient-register-validate').innerHTML = "Registered Sucessfully";
+                toast.success('Registered sucessfully!', {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
+
                 clear();
                 // if(user.role == 'admin')
                 //         navigate('/intern')
@@ -239,7 +244,9 @@ function PatientRegister()
             {
 
                 var error = await data.json()
-                document.getElementById('patient-register-validate').innerHTML = error.errorMessage;
+                toast.error("User already exists", {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
             }
             }
             ).catch((err)=>
@@ -250,7 +257,11 @@ function PatientRegister()
         }
         };
 
-    
+        const expandInfo=()=>
+        {
+                toast.info("Password is your firt 4  character of first name and year of birth")
+        }
+
 
     return(
         <div className="patient-register">
@@ -259,10 +270,15 @@ function PatientRegister()
                     </div>
                     <div className='patient-register-form'>
                         <div className='patient-register-form-container'>
-                            <h3>
+                        <div className='password-info'>
+                            <h2>
                                 Patient Register
-                            </h3>
-                            <hr/>
+                            </h2>
+                            <div className='password'>
+                               
+                                <i class="bi bi-question-circle"  onClick={expandInfo}></i>
+                            </div>
+                        </div>
                            <div className='patient-register-items'>
                             <div className='patient-register-item'>
                                     <label> First Name</label>

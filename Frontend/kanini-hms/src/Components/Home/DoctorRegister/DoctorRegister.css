@@ -155,7 +155,16 @@
     font-weight: 800;
     margin-bottom: 10px;
 }
+.doctor-register .password-info
+{
+    display: flex;
+    
+}
 
+.doctor-register .password
+{
+    margin-left: auto;
+}
 .doctor-register-container span{
     font-size: 0.6rem;
     text-align: center;
@@ -183,6 +192,10 @@
         flex: 100%;
        
     }
-
+    .admin-hide
+    {
+        display: none;
+    }
 
 }
+

@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import './DoctorRegister.css'
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import male from '../../../Asset/male.png';
+import female from '../../../Asset/female.png';
+import { toast } from 'react-toastify';
 
 function DoctorRegister()
 {
@@ -55,20 +58,23 @@ function DoctorRegister()
                 var user = await data.json()
                 sessionStorage.setItem('token',user.token)
                 console.log(user)
+                toast.success('Registered sucessfully!', {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
+        
+                <Navigate to="/"/>
+                
                 clear();
-                document.getElementById('regsiter-doctor-validate').innerHTML = "Register sucessfully";
-
-                // if(user.role == 'admin')
-                //         navigate('/intern')
-                // else{
-                //     setMessage("Intern can't able to fetch interns")
-                // }
+    
             }
             else
             {
 
                 var error = await data.json()
-                document.getElementById('regsiter-doctor-validate').innerHTML = error.errorMessage;
+                toast.error("User already exists", {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
+                
             }
             }
             ).catch((err)=>
@@ -78,6 +84,11 @@ function DoctorRegister()
             )
         }
         };
+
+        const expandInfo=()=>
+        {
+                toast.info("Password is your firt 4  character of first name and year of birth")
+        }
 
         function getAge(d1) {
             var d1= new Date(d1);
@@ -97,7 +108,7 @@ function DoctorRegister()
 
         const ValiditeFirstName=()=>
         {
-            var firstname =(/^[A-Za-z]{1,50}$/).test(doctorRegister.userDetail.firstName);
+            var firstname =(/^[A-Za-z]{4,50}$/).test(doctorRegister.userDetail.firstName);
             if(firstname)
             {
                 console.log(firstname)
@@ -106,7 +117,7 @@ function DoctorRegister()
                 document.body.getElementsByClassName('doctor-first-name')[0].classList.remove('invalid');
             }
             else{
-                document.getElementById('first-name-validate').innerHTML="First Name should have only alphabet and less than 50 character";
+                document.getElementById('first-name-validate').innerHTML="First Name should have only alphabet and more than 4 chracter and less than 50 character";
                 document.body.getElementsByClassName('doctor-first-name')[0].classList.remove('valid');
                 document.body.getElementsByClassName('doctor-first-name')[0].classList.add('invalid');
             }
@@ -264,9 +275,15 @@ function DoctorRegister()
                     </div>
                     <div className='doctor-register-form'>
                         <div className='doctor-register-form-container'>
+                            <div className='password-info'>
                             <h2>
                                 Doctor Register
                             </h2>
+                            <div className='password'>
+                               
+                                <i class="bi bi-question-circle"  onClick={expandInfo}></i>
+                            </div>
+                            </div>
                             <hr/>
                             <div className='doctor-register-items'>
                             <div className='doctor-register-item'>
@@ -346,7 +363,7 @@ function DoctorRegister()
                                 <div className='doctor-register-item'>
                                     <label> Specialization </label>
                                     <br/>
-                                    <input type='tel'  className="doctor-spec" placeholder='Enter your Bkood Group' value={doctorRegister.userDetail.doctor.specialization}  onBlur={ValiditeSpecialization}
+                                    <input type='tel'  className="doctor-spec" placeholder='Enter your Blood Group' value={doctorRegister.userDetail.doctor.specialization}  onBlur={ValiditeSpecialization}
                                     onChange={(event)=>setDoctorRegister({ ...doctorRegister, userDetail: { ...doctorRegister.userDetail, doctor:{...doctorRegister.userDetail.doctor,["specialization"]: event.target.value } }})}
 
                                     
@@ -356,7 +373,7 @@ function DoctorRegister()
                                 <div className='doctor-register-item'>
                                     <label>  Year of Experince </label>
                                     <br/>
-                                    <input type='text'  className="doctor-year" placeholder='Enter your Email' value={doctorRegister.userDetail.doctor.yearOfExperience} onBlur={ValiditeYearOfExperince}
+                                    <input type='text'  className="doctor-year" placeholder='Enter your years of experience' value={doctorRegister.userDetail.doctor.yearOfExperience} onBlur={ValiditeYearOfExperince}
                                     onChange={(event)=>setDoctorRegister({ ...doctorRegister, userDetail: { ...doctorRegister.userDetail, doctor:{...doctorRegister.userDetail.doctor,["yearOfExperience"]: event.target.value } }})}
 
                                       />
@@ -365,7 +382,7 @@ function DoctorRegister()
                                 <div className='doctor-register-item'>
                                     <label>  Consulting fees </label>
                                     <br/>
-                                    <input type='tel'  className="doctor-fee" placeholder='Enter your Email'  value={doctorRegister.userDetail.doctor.consultingFees} onBlur={ValiditeYearOfConsultingFees}
+                                    <input type='tel'  className="doctor-fee" placeholder='Enter your fees'  value={doctorRegister.userDetail.doctor.consultingFees} onBlur={ValiditeYearOfConsultingFees}
                                     onChange={(event)=>setDoctorRegister({ ...doctorRegister, userDetail: { ...doctorRegister.userDetail, doctor:{...doctorRegister.userDetail.doctor,["consultingFees"]: event.target.value } }})}
 
                                       />

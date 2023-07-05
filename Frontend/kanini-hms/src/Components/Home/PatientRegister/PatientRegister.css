@@ -196,3 +196,10 @@
 
 
 }
+
+.patient-register .password-info
+{
+    display: flex;
+    justify-content: space-between;
+}
+
