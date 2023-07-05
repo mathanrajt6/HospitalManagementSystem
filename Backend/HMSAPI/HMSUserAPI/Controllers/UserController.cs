@@ -31,6 +31,8 @@ namespace HMSUserAPI.Controllers
         [ProducesResponseType(typeof(UserDTO),StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ServiceFilter(typeof(ValidateModelFilter))]
+        [ResultFIlter]
+
         public async Task<ActionResult<UserDTO>> Login(UserDTO userDTO)
         {
             try
@@ -69,6 +71,7 @@ namespace HMSUserAPI.Controllers
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ServiceFilter(typeof(ValidateModelFilter))]
+        [ResultFIlter]
         [Authorize]
         public async Task<ActionResult> UpdatePassword(UserPasswordUpdateDTO userPasswordUpdateDTO)
         {

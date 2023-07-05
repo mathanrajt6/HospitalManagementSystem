@@ -32,6 +32,7 @@ namespace HMSUserAPI.Controllers
         [ProducesResponseType(typeof(UserDTO), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ServiceFilter(typeof(ValidateModelFilter))]
+        [ResultFIlter]
         public async Task<ActionResult<UserDTO>> PatientRegister(User user)
         {
             try
@@ -73,7 +74,9 @@ namespace HMSUserAPI.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(List<DoctorDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ResultFIlter]
         [Authorize(Roles = "patient,admin")]
+
         public async Task<ActionResult<List<DoctorDTO>>> GetAllDoctor()
         {
             try
@@ -107,6 +110,7 @@ namespace HMSUserAPI.Controllers
         [ProducesResponseType(typeof(List<DoctorDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ServiceFilter(typeof(ValidateModelFilter))]
+        [ResultFIlter]
         [Authorize(Roles = "patient")]
 
         public async Task<ActionResult<List<DoctorDTO>>> GetAllDoctorBasedOnFilters(DoctorFilterDTO doctorFilterDTO)
@@ -141,6 +145,7 @@ namespace HMSUserAPI.Controllers
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ServiceFilter(typeof(ValidateModelFilter))]
+        [ResultFIlter]
         [Authorize(Roles = "patient")]
 
         public async Task<ActionResult> UpdatePatientDetails(PatientUpdateDTO patientUpdateDTO )
@@ -176,6 +181,7 @@ namespace HMSUserAPI.Controllers
         [ProducesResponseType(typeof(PatientDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ServiceFilter(typeof(ValidateModelFilter))]
+        [ResultFIlter]
         [Authorize(Roles = "patient")]
 
         public async Task<ActionResult<PatientDTO>> GetPatientDetails(UserDTO userDTO)
