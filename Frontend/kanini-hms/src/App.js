@@ -14,6 +14,8 @@ import LoginProtected from './Components/Protected/LoginProtected';
 import Pending from './Components/Main/Pending/Pendind';
 import Rejected from './Components/Main/Rejected/Rejected';
 import UpdatePassword from './Components/Main/UpdatePassword/UpdatePassword';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -34,9 +36,10 @@ function App() {
                         <LoginProtected role={sessionStorage.getItem('role')} > <Main/> </LoginProtected>
             }/>
                    <Route path='/pending' element={<Pending/>}/>
-                   <Route path='/rejected' element={<Rejected/>}/>
+                   <Route path='/un-approved' element={<Rejected/>}/>
                    
           </Routes>
+          <ToastContainer/>
         </BrowserRouter>
 
     </div>
