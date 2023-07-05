@@ -75,12 +75,8 @@ namespace HMSUserAPI.Services
         public async  Task<UserDTO?> PatientRegister(User user)
         {
             var users = await _repo.GetAll();
-            if (users == null)
-            {
-                throw new UserException(ResponseMsg.Messages[8]);
-            }
-
-            if (user != null && user.UserDetail != null && user.UserDetail.Patient != null)
+            
+            if (users != null && user != null && user.UserDetail != null && user.UserDetail.Patient != null)
             {
                 var userExists = users.FirstOrDefault(u => u.Email == user.Email);
                 if (userExists != null)

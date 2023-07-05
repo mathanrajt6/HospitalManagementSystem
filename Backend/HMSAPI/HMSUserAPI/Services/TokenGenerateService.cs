@@ -15,6 +15,12 @@ namespace HMSUserAPI.Services
         {
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenKey"]));
         }
+
+        public TokenGenerateService()
+        {
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("The token to my seceret is this"));
+
+        }
         public Task<string> GenerateJSONWebToken(User user)
         {
             var claims = new List<Claim>

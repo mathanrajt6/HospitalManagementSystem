@@ -14,12 +14,16 @@ namespace HMSUserAPI.Services
     public class UserRepo : IRepo<User,int>
     {
         private readonly UserContext _context;
-        private readonly ICustomLogger _customLogger;
+        //private readonly ICustomLogger _customLogger;
 
+        public UserRepo(UserContext context)
+        {
+            _context = context;
+        }
         public UserRepo(UserContext context,ICustomLogger customLogger)
         {
             _context = context;
-            _customLogger = customLogger;
+            //_customLogger = customLogger;
         }
 
         public async Task<User?> Add(User entity)
@@ -43,7 +47,7 @@ namespace HMSUserAPI.Services
             }
             catch (Exception e)
             {
-                _customLogger.WriteLog(e.Message);
+                //_customLogger.WriteLog(e.Message);
                 await transaction.RollbackAsync();
             }
             return null;
@@ -70,7 +74,7 @@ namespace HMSUserAPI.Services
             }
             catch (Exception e)
             {
-                _customLogger.WriteLog(e.Message);
+                //_customLogger.WriteLog(e.Message);
                 await transaction.RollbackAsync();
             }
             return null;
@@ -116,7 +120,7 @@ namespace HMSUserAPI.Services
             }
             catch (Exception e)
             {
-                _customLogger.WriteLog(e.Message);
+                //_customLogger.WriteLog(e.Message);
                 await transaction.RollbackAsync();
             }
             return null;
