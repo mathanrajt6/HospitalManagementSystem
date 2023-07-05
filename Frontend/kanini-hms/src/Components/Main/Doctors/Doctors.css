@@ -5,7 +5,12 @@
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
+
 }
+
+
+
+
 
 .doctors-list
 {
@@ -82,8 +87,33 @@
     {
         justify-self: end;
     }
-    
+  
   
     
 
+}
+
+
+
+@media screen and  (max-width:500px){
+
+    
+
+}
+
+
+
+.doctors hr{
+    width: 35px;
+    border: 2px solid;
+    border-radius: 5px;
+    margin: 10px 0;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.doctors:hover hr {
+    opacity: 1;
+    transform: translateX(0%);
 }

@@ -74,6 +74,7 @@ function Patients()
             <h2>
                 Patient Details
             </h2>
+            <hr/>
            <div className='patients-search-bar'>
             <label><i class="bi bi-search"> </i> : </label>
            <input placeholder='search patient' type='text' onChange={(event)=>{

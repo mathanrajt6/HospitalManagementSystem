@@ -10,6 +10,7 @@ import DoctorProtected from "../Protected/DoctorProtected";
 import Home from "../Home/Home";
 import LoginProtected from "../Protected/LoginProtected";
 import UpdatePassword from "./UpdatePassword/UpdatePassword";
+import DetailsUpdate from "./DetailsUpdate/DetailsUpdate";
 function Main()
 {
     const navigate = useNavigate();
@@ -52,6 +53,8 @@ function Main()
                                 {/* <li className='header-link-item'> <Link to='/main/doctors' onClick={toggle} > Doctor </Link> </li>
                                 <li className='header-link-item'> <Link  to='/main/patients' onClick={toggle}> Patient </Link> </li> */}
                                 <li className='header-link-item'> <Link to='/main/updatePassword' onClick={closeMenu} > Update Password </Link> </li>
+                                <li className='header-link-item'> <Link to='/main/Profile' onClick={closeMenu} > Profile </Link> </li>
+
                                 <li className='header-link-item'> <Link to='/' onClick={logout}> Logout </Link> </li>
                             </ul>
                             <button className='hamburger' onClick={toggle}>
@@ -68,14 +71,23 @@ function Main()
                     {/* <Route path='/doctors' element={<Doctors/>}/> */}
                     {/* <Route path='/patients' element={<Patients/> }/> */}
                     
-
+                    <Route path='/doctors' element={
+                        <AdminProtected role={sessionStorage.getItem('role')} > <Doctors/> </AdminProtected>
+                    }/>
                     <Route path='/doctors' element={
                         <AdminProtected role={sessionStorage.getItem('role')} > <Doctors/> </AdminProtected>
                     }/>
                       <Route path='/patients' element={
                         <DoctorProtected role={sessionStorage.getItem('role')} > <Patients/> </DoctorProtected>
                     }/>
-                     <Route path="/updatePassword" element={<UpdatePassword/>}/>
+                      <Route path="/updatePassword" element={
+                        <LoginProtected role={sessionStorage.getItem('role')} > <UpdatePassword/> </LoginProtected>
+                    }/>
+                      <Route path="/Profile"  element={
+                        <LoginProtected role={sessionStorage.getItem('role')} > <DetailsUpdate/> </LoginProtected>
+                    }/>
+                    
+
       
                     
                    

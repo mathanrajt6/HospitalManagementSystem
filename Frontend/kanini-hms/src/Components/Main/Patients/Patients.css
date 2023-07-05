@@ -7,7 +7,7 @@
   padding: 0%;
   height: 100%;
   display: grid;
-  grid-template-rows: 10% 90%;
+  grid-template-rows: 14% 86%;
 
 }
 .patients-search
@@ -73,4 +73,24 @@ tr:nth-child(even){background-color:
       border: none;
       border-bottom: 2px solid black;
     }
+}
+
+.patients-search
+{
+  height: auto;
+  margin-bottom: 10px;
+}
+.patients hr{
+  width: 35px;
+  border: 2px solid;
+  border-radius: 5px;
+  margin: 10px 0;
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.patients:hover hr {
+  opacity: 1;
+  transform: translateX(0%);
 }

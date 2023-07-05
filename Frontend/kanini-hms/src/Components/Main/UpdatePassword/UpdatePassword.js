@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './UpdatePassword.css'
+import { toast } from 'react-toastify';
 function UpdatePassword()
 {
 
@@ -53,15 +54,25 @@ function UpdatePassword()
         })
           .then((data) => {
             if (data.status === 202) {
-                document.getElementById('error-validation').innerHTML="Password  Updated Sucessfully";
+                // document.getElementById('error-validation').innerHTML="Password  Updated Sucessfully";
+                toast.success('Password Updated Sucessfully!', {
+                  position: toast.POSITION.BOTTOM_RIGHT
+              });
 
             } else {
-                document.getElementById('error-validation').innerHTML="Unable to Update";
+              toast.error('Unable to update!', {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
+
+                // document.getElementById('error-validation').innerHTML="Unable to Update";
 
             }
           })
           .catch((err) => {
-            console.log(err);
+
+            toast.error('Unable to update!', {
+              position: toast.POSITION.BOTTOM_RIGHT
+          });
           });
       };
 

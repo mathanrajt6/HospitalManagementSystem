@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
-import './Doctor.css'
+import './Doctor.css';
+import male from '../../../Asset/male.png';
+import female from '../../../Asset/female.png';
+import { toast } from 'react-toastify';
 function Doctor(prop)
 {
     const[doctor,setDoctor]=useState(prop.doctor);
@@ -35,8 +38,7 @@ function Doctor(prop)
             {
                 "accept": "text/plain",
                 "Content-Type": 'application/json',
-                "Authorization": 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMCIsInJvbGUiOiJhZG1pbiIsIm5iZiI6MTY4ODI4NzcwOCwiZXhwIjoxNjg4Mzc0MTA4LCJpYXQiOjE2ODgyODc3MDh9.d_465EX7iBUA_w5G1yAoLYWgQNBrdW0vf49twvzXGbM'
-
+                "Authorization": 'Bearer ' + sessionStorage.getItem('token')
             },
             "body":JSON.stringify(adminApprove)}
         ).then(async (data)=>
@@ -44,11 +46,19 @@ function Doctor(prop)
             if(data.status === 202)
             {
                 popbefore();
-                console.log("sucesss")
+                toast.success('Doctor Status Updated Sucessfully!', {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
                 
             }
             else
+            {
+                toast.error('Unable to Updated Doctor status!', {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
                 console.log( await data.json())
+
+            }
         }
         ).catch((err)=>
         {
@@ -67,7 +77,7 @@ function Doctor(prop)
             <div className="doctor-profile">
                 <div className="doctor-profile-container">
                     <div className='doctor-profile-image'>
-                        <img width='200' height='200'/>
+                        <img width='200' height='200' src={doctor.gender=="male" ? male : female}/>
                     </div>
                    <span className="doctor-name">{"DR "+doctor.firstName +" "+doctor.lastName}</span>
                    {/* <span className='drop-down-menu' > <i className="bi bi-chevron-double-down"></i> </span> */}
@@ -77,7 +87,7 @@ function Doctor(prop)
             </div>
             <div className="doctor-content">
                 <div className="doctor-content-container">
-                    <div className="doctor-status">
+                    <div className={doctor.doctor.active == "in-active" ? "red-font" : "green-font"}>
                             {doctor.doctor.active}
                     </div> 
                     <span className="doctor-specialization">

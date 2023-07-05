@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import Doctor from '../Doctor/Doctor';
 import './Doctors.css'
+
+
 function Doctors(prop)
 {
 
@@ -265,6 +267,7 @@ function Doctors(prop)
             <h1>
                 Doctors Details
             </h1>
+            <hr/>
             <div className='doctor-search'>
             <div>
             <label><i class="bi bi-search"> </i> : </label>
@@ -320,7 +323,7 @@ function Doctors(prop)
                 } */}
             </div>
             <div className='doctors-info'>
-{/*                    
+                   
                     {sessionStorage.getItem('role')==='admin' ?
                     (<div className='admin-info'>
                       
@@ -391,7 +394,7 @@ function Doctors(prop)
 
               <p>Remember, it is important to prioritize emergency situations for the safety and well-being of all patients.</p>
                                 </div>)
-                } */}
+                }
             </div>
           </div>
         </div>

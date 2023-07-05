@@ -6,7 +6,7 @@
     list-style: none;
     box-sizing: border-box;
 }
-.doctor
+.doctor 
 {
     box-sizing: border-box;
     width: 100%;
@@ -17,7 +17,7 @@
     margin: 10px 0px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
-
+   
 
 }
 
@@ -32,7 +32,7 @@
 .doctor-content
 {
     flex: 60%;
-    background-color: white;
+    background-color:   white;
 
 }
 .doctor-content-container
@@ -80,10 +80,6 @@
     align-items: center;
 }
 
-.doctor-status
-{
-    margin:10px 0px 20px 50px;
-}
 
 
 .admin-function
@@ -135,3 +131,19 @@ background-color: transparent;
     align-items: center;
 
 } */
+
+
+.red-font
+{
+    color: red;
+    margin:10px 0px 20px 50px;
+    font-weight: 900;
+}
+
+.green-font
+{
+    color: green;
+    margin:10px 0px 20px 50px;
+    font-weight: 900;
+
+}
