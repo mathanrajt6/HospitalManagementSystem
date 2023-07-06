@@ -31,7 +31,7 @@ function PatientRegister()
     const clear = () => {
         setTimeout(() => {
           window.location.reload();
-        }, 2000); // 2000 milliseconds = 2 seconds
+        }, 2000); 
       };
 
     ///
@@ -234,11 +234,7 @@ function PatientRegister()
                 });
 
                 clear();
-                // if(user.role == 'admin')
-                //         navigate('/intern')
-                // else{
-                //     setMessage("Intern can't able to fetch interns")
-                // }
+              
             }
             else
             {
@@ -259,7 +255,7 @@ function PatientRegister()
 
         const expandInfo=()=>
         {
-                toast.info("Password is your firt 4  character of first name and year of birth")
+                toast.info("Password is your first 4  character of first name and year of birth")
         }
 
 

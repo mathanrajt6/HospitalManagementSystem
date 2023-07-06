@@ -6,22 +6,7 @@ import { toast } from 'react-toastify';
 function Doctor(prop)
 {
     const[doctor,setDoctor]=useState(prop.doctor);
-    // "userDetailID": 0,
-    // "firstName": "string",
-    // "lastName": "string",
-    // "email": "string",
-    // "age": 0,
-    // "dateOfBirth": "2023-07-02T07:36:33.775Z",
-    // "phoneNUmber": "string",
-    // "address": "string",
-    // "gender": "string",
-    // "doctor": {
-    //   "doctorID": 0,
-    //   "consultingFees": 0,
-    //   "specialization": "string",
-    //   "yearOfExperience": 0,
-    //   "approvedStatus": "string",
-    //   "active": "string"
+
     const [adminApprove,setAdminAprove]= useState(
         {
             "id":0,

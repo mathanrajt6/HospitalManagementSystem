@@ -12,6 +12,12 @@
       
 }
 
+.home-content span{
+  font-size: 0.6rem;
+  text-align: center;
+  font-weight: 400;
+  display: block;
+}
 
 
 .home-content-image-box
@@ -80,3 +86,81 @@
     }
   }
   
+
+  .home-content   label
+  {
+    text-align: left;
+      font-size: 1rem;
+      font-weight: 600;
+  }
+  
+
+  .home-content    input:focus
+{
+    outline: none;
+}
+
+
+.home-content  input{
+  border: none;
+  border-bottom: 1px solid black;
+  margin-left:10px ;
+  font-size: 0.9rem;
+  width: 200px;
+  text-align: center;
+}
+
+
+.bmi-display
+{
+  border: none;
+}
+
+.home-content button
+{
+    padding: 5px 10px;
+    width: 200px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    color:white;
+    background-color: #0092a8;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+input[type="number"]::-webkit-outer-spin-button, 
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.underweight {
+  color: red;
+}
+
+.normal {
+  color: green;
+}
+
+.overweight {
+  color: orange;
+}
+
+.obese {
+  color: red;
+}
+
+
+.home-content .valid
+{
+    border-bottom:2px solid green !important;
+    transition: 0.2s all;
+}
+
+.home-content .invalid
+{
+    border-bottom:2px solid red !important;
+    transition: 0.2s all;
+
+}

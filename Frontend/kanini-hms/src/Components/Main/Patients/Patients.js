@@ -51,9 +51,7 @@ function Patients()
     
     const [search,setsearch] = useState("");
 
-//     const filteredPatients = patients.filter((patient) =>
-//     patient.lastName.toLowerCase().includes(search.toLowerCase())
-//   );
+
 
   const filteredPatients = patients.filter((patient) =>
     Object.values(patient)
@@ -62,12 +60,7 @@ function Patients()
       .includes(search.toLowerCase())
   );
 
-    // const filter=()=>
-    // {
-    //     setPatients(
-    //         patients.filter
-    //     )
-    // }
+
     return(
         <div className='patients'>
            <div className='patients-search'>
@@ -127,19 +120,3 @@ export default Patients;
 
 
 
-   {/* patients.map((patient,index)=>
-                            {
-                                return(
-                                    <tr key={index}>
-                                        <td>{patient.firstName +" "+ patient.lastName}</td>
-                                        <td> {patient.email} </td>
-                                        <td> {patient.phoneNUmber} </td>
-                                        <td> {patient.age} </td>
-                                        <td> {patient.gender} </td>
-                                        <td> {patient.address}</td>
-                                        <td> {patient.patient.emergencyContactName}</td>
-                                        <td> {patient.patient.emergencyContactPhone}</td>
-
-                                    </tr>
-                                );
-                            }) */}  

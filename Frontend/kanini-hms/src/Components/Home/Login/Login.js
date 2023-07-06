@@ -59,12 +59,6 @@ function Login()
                     }
                     else    
                         navigate('/main/doctors')
-
-                    // if(user.role == 'admin')
-                    //         navigate('/intern')
-                    // else{
-                    //     setMessage("Intern can't able to fetch interns")
-                    // }
                 }
                 else
                 {

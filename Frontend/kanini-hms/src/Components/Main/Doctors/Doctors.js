@@ -6,7 +6,7 @@ import './Doctors.css'
 function Doctors(prop)
 {
 
-    const [doctors,setDoctors]= useState([]);
+    const [doctors,setDoctors] = useState([]);
     const[doctorStatus,setDoctorStatus] = useState(
         {
             "status":""
@@ -106,7 +106,7 @@ function Doctors(prop)
           })
           .then((exInterns) => {
             setDoctors(exInterns);
-            console.log(exInterns); // Log the updated state value here
+            console.log(exInterns); 
           })
           .catch((err) => {
             console.log(err);
@@ -114,43 +114,6 @@ function Doctors(prop)
       };
       
 
-    //   const filter=()=>
-    //   {
-    //     console.log(doctorStatus);
-    //     fetch('http://localhost:5199/api/Admin/GetAllDoctorGetAllDoctorBasedOnStatus',{
-    //         "method":"POST",
-    //         "headers":
-    //         {
-    //             "accept": "text/plain",
-    //             "Content-Type": 'application/json',
-    //             "Authorization": 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMCIsInJvbGUiOiJhZG1pbiIsIm5iZiI6MTY4ODI4NzcwOCwiZXhwIjoxNjg4Mzc0MTA4LCJpYXQiOjE2ODgyODc3MDh9.d_465EX7iBUA_w5G1yAoLYWgQNBrdW0vf49twvzXGbM'
-
-    //         },
-    //         "body":JSON.stringify(doctorStatus)
-    //     }).then(async (data)=>
-    //     {
-    //         if(data.status == 200)
-    //         {
-    //             return data.json();
-    //         }
-    //         else
-    //         {
-    //            return [];
-    //         }
-           
-            
-    //     }
-    //     ).then((exInterns) => {
-    //         setDoctors(exInterns);
-    //     console.log(doctors);
-
-    //       })
-    //     .catch((err)=>
-    //     {
-    //     console.log(err.error)
-    //     }
-    //     )
-    //   }
 
       const adminfilter=(e)=>
       {
@@ -178,41 +141,10 @@ function Doctors(prop)
       }
 
 
-    //   const doctorPatientFilter=()=>
-    //   {
-    //     fetch('http://localhost:5199/api/Patient/GetAllDoctorBasedOnFilters',{
-    //             "method":"POST",
-    //             "headers":
-    //             {
-    //                 "accept": "text/plain",
-    //                 "Content-Type": 'application/json',
-    //                 "Authorization": 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4Iiwicm9sZSI6InBhdGllbnQiLCJuYmYiOjE2ODgyODY5NzIsImV4cCI6MTY4ODM3MzM3MiwiaWF0IjoxNjg4Mjg2OTcyfQ.5e0KOZsWKwrkmm98fKOzuyK9wRmjPDcpugC9EUYirPA'
-    
-    //             },
-    //             "body":JSON.stringify(doctorActiveStatus)
-    //         }
-    //         ).then(async (data)=>
-    //         {
-    //             if(data.status == 200)
-    //             {
-    //                 return data.json();
-    //             }
-    //             else{
-    //                 return [];
-    //             }
-    //         }
-    //         ).then((exInterns) => {
-    //             setDoctors(exInterns);
-    //           })
-    //         .catch((err)=>
-    //         {
-    //         console.log(err.error)
-    //         }
-    //         )
-    //   }
+ 
 
     const doctorPatientFilter = () => {
-        setDoctors([]); // Clear the state before making the API call
+        setDoctors([]); 
         fetch('http://localhost:5199/api/Patient/GetAllDoctorBasedOnFilters', {
           "method": 'POST',
           "headers": {
@@ -313,14 +245,7 @@ function Doctors(prop)
                       })
                       
                     }
-               
-                {/* {
-                    doctors.map((doctor, index) => {
-                        
-                        return( <Doctor key={index} doctor={doctor} />);
-                       })
-            
-                } */}
+              
             </div>
             <div className='doctors-info'>
                    

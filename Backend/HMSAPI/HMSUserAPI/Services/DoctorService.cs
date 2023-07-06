@@ -25,10 +25,7 @@ namespace HMSUserAPI.Services
         public async Task<UserDTO?> DoctorRegister(User user)
         {
             var users = await _repo.GetAll();
-            if (users == null)
-            {
-                throw new UserException(ResponseMsg.Messages[9]);
-            }
+            
 
             if (user != null && user.UserDetail != null && user.UserDetail.Doctor != null)
             {

@@ -87,7 +87,7 @@ function DoctorRegister()
 
         const expandInfo=()=>
         {
-                toast.info("Password is your firt 4  character of first name and year of birth")
+                toast.info("Password is your first 4  character of first name and year of birth")
         }
 
         function getAge(d1) {

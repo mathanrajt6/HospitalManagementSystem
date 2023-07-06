@@ -50,52 +50,7 @@ namespace TestHMSUserAPI
         }
 
 
-        //[TestMethod]
-        //public async Task TestADD1()
-        //{
-
-
-        //    using (var context = new UserContext(TestInitialize()))
-        //    {
-        //        var user = new User();
-        //        user.Id = 1;
-        //        user.Role = "admin";
-        //        user.Email = "madhanmani0601@gmail.com";
-        //        user.PasswordHash = new byte[] { 1, 2, 3, 4 };
-        //        user.HashKey = new byte[] { 1, 2, 3, 4 };
-        //        user.UserDetail = new UserDetail();
-        //        user.UserDetail.UserDetailID = 1;
-        //        user.UserDetail.FirstName = "madhan";
-        //        user.UserDetail.PhoneNUmber = "1234567890";
-        //        user.UserDetail.LastName = "raj";
-        //        user.UserDetail.Address = "test address";
-        //        user.UserDetail.DateOfBirth = new DateTime();
-        //        user.UserDetail.Gender = "male";
-        //        //user.UserDetail.Patient = new Patient();
-        //        //user.UserDetail.Patient.PatientID = 1;
-        //        //user.UserDetail.Patient.EmergencyContactName = "test";
-        //        //user.UserDetail.Patient.EmergencyContactPhone = "1245435354";
-        //        //user.UserDetail.Patient.BloodGroup = "a+";
-        //        //user.UserDetail.Doctor = new Doctor();
-        //        //user.UserDetail.Doctor.DoctorID = 1;
-        //        //user.UserDetail.Doctor.ApprovedStatus = "";
-        //        //user.UserDetail.Doctor.Active = "active";
-        //        //user.UserDetail.Doctor.ConsultingFees = 1000;
-        //        //user.UserDetail.Doctor.Specialization = "test";
-        //        //user.UserDetail.Doctor.YearOfExperience = 10;
-
-        //        IRepo<User, int> repo = new UserRepo(context);
-
-        //        var user1 = await repo.Add(user);
-        //        Assert.IsNotNull(user1);
-        //        Assert.IsNotNull(user1.UserDetail);
-
-        //        Assert.AreEqual(user1.Id, user.Id);
-
-
-
-        //    }
-        //}
+  
 
 
         [TestMethod]
